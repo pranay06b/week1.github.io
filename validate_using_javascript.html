@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<head>
+	<style type="text/css">
+	.error{
+		visibility: hidden;
+	}
+
+	</style>
+<script>
+
+function validate() {
+
+   	//Pattern A
+   	var name = document.getElementById('name').value;
+    var patta = new RegExp("[a-zA-Z][a-zA-Z\\s]*$");    
+    var resa = patta.test(name);
+    
+    //Result of A
+   	
+    if(resa==true)
+    resa = length(name,30);
+
+    //Pattern B
+    var stid = document.getElementById('stid').value;
+    //Pattern B
+    var pattb = new RegExp("[a-zA-Z0-9]+$");
+    //Result B
+    var resb = pattb.test(stid);
+    
+    if(resb==true)
+    resb = length(stid,10);
+    //pattern C
+    var addr = document.getElementById('addr').value;
+    //result C
+
+    var resc = length1(addr,1,200);
+    //Pattern D
+    var age = document.getElementById('age').value;
+    //Result D
+    var resd = age<100&&age>0;
+    //Pattern E
+    var date = document.getElementById('date').value;
+    var patte = new RegExp("[0-9][0-9]['/'][0-9][0-9]['/'][0-9][0-9][0-9][0-9]");    
+    
+    var rese = patte.test(date);
+    if(rese==true)
+    {
+    rese = validatedate(date);
+	}
+	showerror(resa,resb,resc,resd,rese);
+	if(resa&&resb&&rese&&resd&&resc)
+	{
+		alert("valid input");
+	}
+	return resa&&resb&&rese&&resd&&resc;
+}
+
+function showerror (resa,resb,resc,resd,rese) {
+	// body...
+	
+	if(!resa)
+	{
+		//alert("a");
+		document.getElementById('errorname').style.visibility="visible";
+	}
+	else
+	{
+		document.getElementById('errorname').style.visibility="hidden";
+	}
+	
+	if(!resb)
+	{
+		document.getElementById('errorid').style.visibility="visible";
+	}
+	else
+	{
+		document.getElementById('errorid').style.visibility="hidden";
+	}
+	if(!resc)
+	{
+		document.getElementById('erroraddr').style.visibility="visible";
+	}
+	else
+	{
+		document.getElementById('erroraddr').style.visibility="hidden";
+	}
+	if(!resd)
+	{
+	
+		document.getElementById('errorage').style.visibility="visible";
+	}
+	else
+	{
+		
+		document.getElementById('errorage').style.visibility="hidden";
+	}
+	if(!rese)
+	{
+		document.getElementById('errordate').style.visibility="visible";
+	}
+	else
+	{
+		document.getElementById('errordate').style.visibility="hidden";
+	}
+}
+
+function length (str,len) {
+	// body...
+	if(str.length>=len)
+	{
+		return false;
+	}
+	else{
+		return true;
+	}
+		
+	
+}
+function validatedate (date) {
+	// body...
+	var extract1 = new RegExp("[0-9][0-9]");
+	var d = extract1.exec(date);
+	extract2 = new RegExp("['/'][0-9][0-9]['/']");
+	year=/[0-9][0-9][0-9][0-9]/.exec(date);
+	var m = /[0-9][0-9]/.exec(extract2.exec(date));
+	d=parseInt(d);
+	m=parseInt(m);
+	year=parseInt(year);
+	if(m <0 || m>12)
+		return false;
+	var days =[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+	if(year%4==0)
+		days[1]=29;
+	if(d>=days[m-1])
+	{
+		return false;
+	}
+		
+	
+
+	
+	return true;
+
+}
+function length1 (str,len1,len2) {
+	// body...
+	if(str.length>=len1 && str.length<=len2)
+		return true;
+	else
+		return false;
+	
+}
+</script>
+</head>
+<title>
+	Validation Form
+</title>
+<body>
+<form onsubmit="return validate();">
+	<div id="name1">
+	Name:<input type ="text" id="name" autofocus>
+	<div class="error" id="errorname">Invalid Input</div>
+</div>
+<div id="stid1">
+</br>
+	ID:<input type="text" id="stid">
+	<div class="error" id="errorid">Invalid Input</div>
+</div>
+</br>
+<div id="addr1">
+	Address : <textarea id="addr" rows="4" cols="50"></textarea>
+	<div id="erroraddr" class="error">Invalid Input</div>
+</div>
+</br>
+<div id="age1">
+	Age : <input type="number" id ="age"> 
+	<div id="errorage" class="error">Invalid Input</div>
+	</div>
+</br>
+<div id="date1">
+	Date : <input type="text" id="date" placeholder="dd/mm/yyyy">
+	<div id="errordate" class="error">Invalid Input</div>
+</div>
+<input type="submit">	
+</form>	
+
+</body>
+</html>

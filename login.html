@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<head>
+<script>
+function login()
+{
+	var usrname = document.getElementById('usrname').value.toLowerCase();
+	var pwd = document.getElementById('pwd').value.toLowerCase();
+	if(usrname == "scott" && pwd == "tiger")
+	{
+	
+	window.open("secondpage.html","_blank");
+			return true;
+	}
+	else
+	{
+		alert("Username and Password does not match");
+		return false;
+	}
+}
+</script>
+</head>
+<title>
+Login Page
+</title>
+<body>
+<form onsubmit="login();">
+Username : <INPUT type="text" id="usrname" autofocus>
+</br>
+Password : <INPUT type="password" id="pwd">
+</br>
+<INPUT type="submit" value="Login">
+</form>
+</br>
+</body>
+
+</html>
